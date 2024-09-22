@@ -1,0 +1,28 @@
+<% if @cart_products.empty?%>
+  <%= 'Your cart is empty.' %>
+  <p>Go to the <%= link_to 'products', products_path %> to start adding products.</p>
+  <p>Your total is  <%= number_to_currency(@cart.total_price) %></p>
+<% else %>
+  <% @cart_products.each do |cart_product| %>
+  <% product = get_product(cart_product.product_id) %>
+  <div class = 'card-header' >
+    <div class =' card-body' >
+      <h5 class = 'card-title' > <%= product.name %></h5>
+      <p class = 'card-text' >Product price is: <%= number_to_currency(product.price) %></p>
+      <p class = 'card-text' >Your subtotal is: <%= number_to_currency(cart_product.total_price) %></p>
+      <%= render 'cart_products/update_product', cart_product: cart_product %>
+      <%= pluralize(product.comments.count, ' Comments') %>
+      <br/>
+      <%= link_to 'Show', product_path(product), class:'btn btn-secondary mt-4' %>
+      <%= link_to 'Remove from cart', cart_remove_from_cart_path(cart_product), method: :delete, class: 'btn btn-danger mt-4 ml-3' %>
+    </div>
+  </div>
+  <br/>
+  <% end %>
+  <% unless @final_sum.zero? %>
+  <p>Your cart total is: <%= number_to_currency(@final_sum) %></p>
+  <%= link_to 'Checkout', paypal_checkouts_path, class:'btn btn-primary', method: :post %>
+  <% end %>
+<% end %>
+
+

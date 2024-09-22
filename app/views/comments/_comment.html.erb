@@ -1,0 +1,29 @@
+<br/>
+<br/>
+ <div id = 'comment-<%= comment.id %>' >
+ <div class ='card-header' >
+    <% if comment.avatar.attached? %>
+      <% comment.avatar.each do |image| %>
+        <img class = 'product-img' src ='<%= cloudinary_url(image.key) %>' alt ='Prdocut image' >
+        <% end %>
+    <% end %>
+      <div class ='card-body' >
+        <p class ='card-text' ><%= comment.description %></p>
+        <p>Made by <%= comment.user.name %></p>
+        <% if (comment.updated_at - comment.created_at) > 1 %>
+          <span>Updated <%= time_ago_in_words(comment.updated_at) %> ago</span>
+        <% else %>
+          <span>Posted <%= time_ago_in_words(comment.created_at) %> ago</span>
+        <% end %>
+        <% if current_user && current_user == comment.user%>
+          <div class = 'btn-group float-right' >
+            <%= link_to 'Edit comment', edit_product_comment_path(@product,comment),
+            class: 'btn btn-primary mr-3', remote: true %>
+            <%= link_to 'Delete comment', product_comment_path(@product,comment),
+            method: :delete,class: 'btn btn-danger', remote: true%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <br/>
+</div>

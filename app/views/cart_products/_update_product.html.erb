@@ -1,0 +1,7 @@
+<%= form_with url: cart_update_cart_path(cart_product.cart_id) do |f| %>
+  <%= f.hidden_field :product_id, value: cart_product.product_id %>
+  <%= f.hidden_field :cart_id, value: cart_product.cart_id %>
+  <%= f.number_field :quantity, value: cart_product.quantity, min: 1 %>
+  <%= f.submit  'Update Cart', class: 'btn btn-primary' %>
+<% end %>
+

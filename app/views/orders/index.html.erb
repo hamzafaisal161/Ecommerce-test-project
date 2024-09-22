@@ -1,0 +1,15 @@
+<h1>All your orders</h1>
+<br/>
+<% @orders.each do |order| %>
+  <% cart_products = get_cart_products(order)%>
+  <% cart_products.each do |cart_product| %>
+    <% product = get_product(cart_product.product_id) %>
+    <%= render 'orders/product', product: product, cart_product: cart_product%>
+    <h5>Payment ID : <%= order.payment_id %></h5>
+    <h5>Payer ID : <%= order.payer_id %></h5>
+    <h4>Your order total was: <%= number_to_currency(order.total_amount) %></h4>
+    <br/>
+    <br/>
+    <br/>
+  <% end %>
+<% end %>

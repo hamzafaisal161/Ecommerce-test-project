@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <% if @product.avatar.attached? %>
+      <% @product.avatar.each do |image| %>
+        <img class = 'product-img' src='<%= cloudinary_url(image.key)%>' style='width:300px;height:300px;' alt='Product-image' >
+        <% end %>
+    <% else %>
+      <img class = 'product-img' src='https://res.cloudinary.com/devsinc-hamza/image/upload/v1664980708/ecommerce/no-product-image_m6t4yl.png' alt='Product-image' >
+    <% end %>
+    <p>The price of product <%= @product.name%> has been updated.</p>
+    <p>The new price is now $ <%= @product.price %>.</p>
+    <p><%= link_to 'Login', user_session_url %> now and purchase this product!</p>
+  </body>
+</html>

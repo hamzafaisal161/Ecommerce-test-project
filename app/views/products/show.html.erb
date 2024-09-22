@@ -1,0 +1,34 @@
+<%= render 'products/product2', product: @product %>
+
+<% if user_signed_in?%>
+  <% @p = current_user.products.find_by(id: params[:id])%>
+  <% if @p.present? %>
+    <%= link_to 'Edit', edit_product_path(@product), class: 'btn btn-secondary' %>
+    <%= link_to 'Delete', [@product], method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-danger' %>
+  <% else %>
+    <%=  render 'cart_products/add_product' %>
+    <%= link_to 'Add to Wishlist', add_product_user_wishlist_path(@product), class:'btn btn-dark float-right' %>
+  <% end %>
+  <% else %>
+  <%=  render 'cart_products/add_product' %>
+<% end %>
+<%= link_to 'Back', products_path, class:'btn btn-dark' %>
+<br/>
+<br/>
+<br/>
+<br/>
+<% if @p.nil? && user_signed_in? %>
+<%= render 'comments/form', comment: @comment %>
+<% end %>
+
+<div id = 'comment_pane' >
+  <% @comments.each do |comment| %>
+   <%= render 'comments/comment', comment: comment %>
+  <% end %>
+</div>
+
+<% unless user_signed_in? %>
+<br/>
+<br/>
+<p> You need to <%= link_to 'Login', new_user_session_path %> before you can comment!</p>
+<% end %>

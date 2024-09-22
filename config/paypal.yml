@@ -1,0 +1,17 @@
+test: &default
+  client_id: <%= ENV['PAYPAL_CLIENT_ID'] %>
+  client_secret: <%= ENV['PAYPAL_CLIENT_SECRET'] %>
+  mode: sandbox
+development:
+  ssl_options:
+    ca_file: null
+  client_id: <%= ENV['PAYPAL_CLIENT_ID'] %>
+  client_secret: <%= ENV['PAYPAL_CLIENT_SECRET'] %>
+  mode: sandbox
+production:
+  ssl_options:
+    ca_file: null
+  client_id: <%= ENV['PAYPAL_CLIENT_ID'] %>
+  client_secret: <%= ENV['PAYPAL_CLIENT_SECRET'] %>
+  mode: sandbox
+

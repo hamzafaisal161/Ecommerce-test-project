@@ -1,0 +1,23 @@
+<div class = 'card-header' >
+  <div class = 'card-body' >
+    <% if product.avatar.attached? %>
+      <img class = 'product-img' src='<%= cloudinary_url(product.avatar.first.key) %>' alt='Product-image' >
+    <% else %>
+      <img class = 'product-img' src='https://res.cloudinary.com/devsinc-hamza/image/upload/v1664980708/ecommerce/no-product-image_m6t4yl.png' alt='Product-image' >
+    <% end %>
+    <br/>
+    <br/>
+    <h5 class = 'card-title' > <%= product.name %></h5>
+    <p class = 'card-text' >Product price is: <%= number_to_currency(product.price) %></p>
+    <p class = 'card-text' >Quantity: <%= cart_product.quantity %></p>
+    <p class = 'card-text' >Your subtotal is: <%= number_to_currency(cart_product.total_price) %></p>
+    <%= pluralize(product.comments.count, ' Comments') %>
+    <br/>
+    <br/>
+    <%= link_to 'Show', product_path(product), class:'btn btn-secondary' %>
+    <br/>
+    <br/>
+  </div>
+</div>
+<br/>
+<br/>

@@ -1,0 +1,95 @@
+<%= javascript_include_tag 'edit_user' %>
+<h2>Edit Profile<% resource_name.to_s.humanize %></h2>
+
+<div class = 'card' >
+  <div class = 'card-header' >
+
+  <div class = 'card-body' >
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render 'devise/shared/error_messages', resource: resource %>
+  </div>
+
+  <div class = 'field form-group' >
+    <% f.label :name %><br />
+    <%= f.text_field :name, autofocus: true, class:'form-control', placeholder:'Name' %>
+  </div>
+
+  <div class = 'field form-group' >
+    <% f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, class:'form-control', placeholder:'Email', autocomplete: 'email' %>
+  </div>
+
+   <div class = 'field form-group' >
+    <% f.label :contact_no %><br />
+    <%= f.text_field :contact_no, autofocus: true, class:'form-control', placeholder:'Contact number' %>
+  </div>
+
+  <%= 'Select gender.' %>
+  <%= f.radio_button :gender, 'Male' %>
+  <%= f.label :gender, 'Male', :value => 'male' %>
+  <%= f.radio_button :gender, 'Female' %>
+  <%= f.label :gender, 'Female', :value => 'female' %>
+
+  <div class = 'field form-group' >
+    <% f.label :address %><br />
+    <%= f.text_field :address, autofocus: true, class:'form-control',placeholder:'Address' %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class = 'field form-group' >
+    <% f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.password_field :password, class:'form-control', placeholder:'Password', autocomplete: 'new-password' %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> characters minimum</em>
+    <% end %>
+  </div>
+
+  <div class = 'field form-group' >
+    <% f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation,class:'form-control',placeholder:'Confirm Password', autocomplete: 'new-password' %>
+  </div>
+
+  <div class = 'field form-group' >
+    <% f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.password_field :current_password,class:'form-control',placeholder:'Current Password', autocomplete: 'current-password' %>
+  </div>
+  <strong>Image</strong>
+  <br/>
+  <br/>
+  <% if @user.avatar.attached? %>
+     <img class = 'avatar-img' src = '<%= cloudinary_url(@user.avatar.key) %>' alt = 'Product-image' >
+  <% else %>
+   <img class = 'product-img' src = 'https://res.cloudinary.com/devsinc-hamza/image/upload/v1664980707/ecommerce/default_image_wogy4h.jpg' alt = 'Product-image' >
+  <% end %>
+  <br/>
+  <div class = 'field form-group' >
+    <% f.label :image %><br/>
+    <%= f.file_field :avatar,class:'form-control' %>
+  </div>
+  <div class = 'actions' >
+    <%= f.submit 'Update', class:'btn btn-secondary' %>
+  </div>
+  <% end %>
+  </div>
+</div>
+
+<br/>
+<br/>
+
+<div class = 'card' >
+  <div class = 'card-header' >
+    <h4>Cancel my account</h4>
+  </div>
+  <div class = 'card-body' >
+    <h5 class = 'card-title' >Unhappy?</h5>
+    <p class = 'card-text' ><%= button_to 'Cancel my account',
+    registration_path(resource_name), data: { confirm: 'Are you sure?' },
+     method: :delete,class:'btn btn-danger' %></p>
+  </div>
+</div>
+<br/>
+<%= link_to 'Back', :back, class: 'btn btn-dark' %>

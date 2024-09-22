@@ -1,0 +1,27 @@
+
+/.bundle
+
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+/storage/*
+!/storage/.keep
+/node_modules
+/yarn-error.log
+/public/assets
+.byebug_history
+/config/master.key
+<<<<<<< HEAD
+
+/config/application.yml
+
+=======
+/config/application.yml
+coverage
+>>>>>>> 0f3d051bba916a15e606fab034716c6159069c3a
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+
+# Ignore application configuration
+/config/application.yml

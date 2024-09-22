@@ -1,0 +1,19 @@
+<div class = "card" >
+  <div class = "card-header" >
+    <%= product.name %>
+  </div>
+  <div class = "card-body" >
+   <% if product.avatar.attached? %>
+    <% product.avatar.each do |image| %>
+      <img class = "product-img" src="<%= cloudinary_url(image.key) %>" alt= "product-img" >
+      <% end %>
+  <% else %>
+    <img class = 'product-img' src='https://res.cloudinary.com/devsinc-hamza/image/upload/v1664980708/ecommerce/no-product-image_m6t4yl.png' alt='product-image' >
+  <% end %>
+    <br/>
+    <br/>
+    <h5 class = "card-title" ><%= number_to_currency(product.price) %></h5>
+    <p class = "card-text" ><%= product.description %></p>
+  </div>
+</div>
+<br/>
